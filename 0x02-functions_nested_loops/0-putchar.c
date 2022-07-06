@@ -1,21 +1,20 @@
 #include "main.h"
 
 /**
-*main - program entry point
-*Description : program to print _putchar to the console
-*Return: 0 if program runs successfully
-*/
+ * main -print _putchar, followed by new line
+ * Return; 0
+ */
+
 int main(void)
 {
-	char putChStr[] = "_putchar";
-	int lengthOfChStr = sizeof(putChStr) / sizeof(putChStr[0]);
-
-	int i;
-
-	for (i = 0; i < lengthOfChStr - 1; i++)
-	{
-		_putchar(putChStr[i]);
-	}
+	_putchar('_');
+	_putchar('p');
+	_putchar('u');
+	_putchar('t');
+	_putchar('c');
+	_putchar('h');
+	_putchar('a');
+	_putchar('r');
 	_putchar('\n');
 
 	return (0);
