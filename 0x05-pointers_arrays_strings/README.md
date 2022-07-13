@@ -1,1 +1,1 @@
-my first pointers
+C - Pointers, arrays and strings
