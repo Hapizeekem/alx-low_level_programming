@@ -1,16 +1,14 @@
 #include <stdlib.h>
 
 /**
- * argstostr - Concatenates all the arguments of the program
+ * argstostr - prints args
  *
- * @ac: Argument total count
+ * @ac: takes in width of grid
  *
- * @av: Pointer to arguments
+ * @av: height of grid
  *
- * Retunr: Pointer to concatenated string (SUCCESS) or
- * NULL if @ac == 0 or @av == NULL (FAILURE) or
- * NULL if if insufficient memory was available (FAILURE)
- */
+ * Retunr: the args one line at a time
+ */ 
 
 char *argstostr(int ac, char **av)
 {
