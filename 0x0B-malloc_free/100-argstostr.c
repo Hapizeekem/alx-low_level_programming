@@ -8,9 +8,9 @@
  * @av: height of grid
  *
  * Return: the args one line at a time
- */ 
+ */
 
-char *argstostr(int ac, char **av)
+char *arigstostr(int ac, char **av)
 {
 	int i, j;
 	int count = 0;
