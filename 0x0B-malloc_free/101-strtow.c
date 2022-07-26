@@ -1,88 +1,46 @@
 #include "main.h"
 
 /**
- * strtow - splits a string into words.
- * @str: string pointer
- * Return: null if str == null or str is empty
+ *argstostr - function name
+ *@ac: first param of type int
+ *@av: 2nd param of type char
+ *Return: returns a char
  */
-char **strtow(char *str)
+char *argstostr(int ac, char **av)
 {
-	char **split;
-	int i, j = 0, temp = 0, size = 0, words = num_words(str);
+	char *new_string = NULL;
+	int k = 0, i = ac, j, sum = 0, temp = 0;
 
-	if (words == 0)
+	if (ac == 0 || av == NULL)
 		return (NULL);
-	split = (char **) malloc(sizeof(char *) * (words + 1));
-	if (split != NULL)
+
+	while (ac--)
+		sum += (len(av[ac]) + 1);
+	new_string = (char *) malloc(sum + 1);
+
+	if (new_string != NULL)
 	{
-		for (i = 0; i <= len(str) && words; i++)
+		while (k < i)
 		{
-			if ((str[i] != ' ') && (str[i] != '\0'))
-				size++;
-			else if (((str[i] == ' ') || (str[i] == '\0')) && i && (str[i - 1] != ' '))
-			{
-				split[j] = (char *) malloc(sizeof(char) * size + 1);
-				if (split[j] != NULL)
-				{
-					while (temp < size)
-					{
-						split[j][temp] = str[(i - size) + temp];
-						temp++;
-					}
-					split[j][temp] = '\0';
-					size = temp = 0;
-					j++;
-				}
-				else
-				{
-					while (j-- >= 0)
-						free(split[j]);
-					free(split);
-					return (NULL);
-				}
-			}
+			for (j = 0; av[k][j] != '\0'; j++)
+				new_string[j + temp] = av[k][j];
+			new_string[temp + j] = '\n';
+			temp += (j + 1);
+			k++;
 		}
-		split[words] = NULL;
-		return (split);
+		new_string[temp] = '\0';
 	}
 	else
-		return (NULL);
-}
-
-
-/**
- *num_words - counts the number of words in str
- *@str: string to be used
- *Return: number of words
- */
-int num_words(char *str)
-{
-	int i = 0, words = 0;
-
-	while (i <= len(str))
 	{
-		if ((str[i] != ' ') && (str[i] != '\0'))
-		{
-			i++;
-		}
-		else if (((str[i] == ' ') || (str[i] == '\0')) && i && (str[i - 1] != ' '))
-		{
-			words += 1;
-			i++;
-		}
-		else
-		{
-			i++;
-		}
+		return (NULL);
 	}
-	return (words);
+	return (new_string);
 }
 
 /**
- *len - returns length of str
- *@str: string to be counted
- *
- *Return: length of the string
+ *len - gets the length of a string
+ *@str: string counnted
+ *Return: length of string
  */
 
 int len(char *str)
