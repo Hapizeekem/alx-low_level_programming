@@ -7,7 +7,7 @@
  *
  * @av: height of grid
  *
- * Retunr: the args one line at a time
+ * Return: the args one line at a time
  */ 
 
 char *argstostr(int ac, char **av)
