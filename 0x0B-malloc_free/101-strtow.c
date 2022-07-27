@@ -1,56 +1,76 @@
 #include "main.h"
 
 /**
- *argstostr - function name
- *@ac: first param of type int
- *@av: 2nd param of type char
- *Return: returns a char
+ * wrdcnt - counts the number of words in a string
+ * @s: string to count
+ *
+ * Return: int of number of words
  */
-char *argstostr(int ac, char **av)
+int wrdcnt(char *s)
 {
-	char *new_string = NULL;
-	int k = 0, i = ac, j, sum = 0, temp = 0;
+	int i, n = 0;
 
-	if (ac == 0 || av == NULL)
-		return (NULL);
-
-	while (ac--)
-		sum += (len(av[ac]) + 1);
-	new_string = (char *) malloc(sum + 1);
-
-	if (new_string != NULL)
+	for (i = 0; s[i]; i++)
 	{
-		while (k < i)
+		if (s[i] == ' ')
 		{
-			for (j = 0; av[k][j] != '\0'; j++)
-				new_string[j + temp] = av[k][j];
-			new_string[temp + j] = '\n';
-			temp += (j + 1);
-			k++;
+			if (s[i + 1] != ' ' && s[i + 1] != '\0')
+				n++;
 		}
-		new_string[temp] = '\0';
+		else if (i == 0)
+			n++;
 	}
-	else
-	{
-		return (NULL);
-	}
-	return (new_string);
+	n++;
+	return (n);
 }
 
 /**
- *len - gets the length of a string
- *@str: string counnted
- *Return: length of string
+ * strtow -  splits a string into words
+ *
+ * @str: string to splear
+ *
+ * Return:  pointer to an array of strings (words)
  */
-
-int len(char *str)
+char **strtow(char *str)
 {
-	int len = 0;
+	int i, j, k, l, n = 0, qa = 0;
+	char **q;
 
-	if (str != NULL)
+	if (str == NULL || *str == '\0')
+		return (NULL);
+	n = wrdcnt(str);
+	if (n == 1)
+		return (NULL);
+	q = (char **)malloc(n * sizeof(char *));
+	if (q == NULL)
+	return (NULL);
+		q[n - 1] = NULL;
+		i = 0;
+	while (str[i])
 	{
-		while (str[len])
-			len++;
+		if (str[i] != ' ' && (i == 0 || str[i - 1] == ' '))
+		{
+		for (j = 1; str[i + j] != ' ' && str[i + j]; j++)
+			;
+			j++;
+			q[qa] = (char *)malloc(j * sizeof(char));
+			j--;
+			if (q[qa] == NULL)
+			{
+				for (k = 0; k < qa; k++)
+					free(q[k]);
+				free(q[n - 1]);
+					free(q);
+				return (NULL);
+			}
+			for (l = 0; l < j; l++)
+				q[qa][l] = str[i + l];
+			q[qa][l] = '\0';
+				qa++;
+				i += j;
+		}
+		else
+			i++;
 	}
-	return (len);
+	return (q);
 }
