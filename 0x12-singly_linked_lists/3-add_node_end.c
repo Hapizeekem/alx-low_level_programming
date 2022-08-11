@@ -1,68 +1,49 @@
-#include <string.h>
-#include <stdio.h>
 #include "lists.h"
-#include "strlen.c"
+#include <string.h>
 
-list_t *createNewNode(const char *str);
-
+int _strlen(const char *s);
 /**
- * add_node_end - dds a new node at the end of a list_t list
- * @head: douple pointer to the head of the linked list
- * @str: pointer to string to be assigned to the added node's str property
- * Return: pointer to the new node (SUCCESS) OR
- * NULL, if there is insufficent memory available (FAILURE)
+ * add_node_end - adds a new node at the end of a list_t list
+ * @head: a pointer to the first node
+ * @str: a pointer to the string
+ *
+ * Return: the address of the new element, or NULL if its failed
  */
+
 list_t *add_node_end(list_t **head, const char *str)
 {
-	list_t *current_node = *head;
+	list_t *new;
+	list_t *lastNode;
 
-	if (current_node)
-	{
-		while (current_node)
-		{
-			if (current_node->next)
-			{
-				current_node = current_node->next;
-			}
-			else
-			{
-				current_node->next = createNewNode(str);
-				return (current_node->next);
-			}
-		}
-	}
+	new = malloc(sizeof(list_t));
+	if (new == NULL)
+		return (NULL);
+	new->str = strdup(str);
+	new->len = _strlen(str);
+	new->next = NULL;
+	if (*head == NULL)
+		*head = new;
 	else
 	{
-		*head = createNewNode(str);
+		lastNode = *head;
+		while (lastNode->next != NULL)
+			lastNode = lastNode->next;
+		lastNode->next = new;
 	}
-
-	return (*head);
+	return (new);
 }
 
 /**
- * createNewNode - create a new list_t list node
- * @str: pointer to string to be assigned to the created node's str property
- * Return: pointer to the new node (SUCCESS) OR
- * NULL, if there is insufficent memory available (FAILURE)
+ * _strlen - returns the length of a string
+ * @s: a pointer to the string
+ * Return: the length of a string
  */
 
-list_t *createNewNode(const char *str)
+int _strlen(const char *s)
 {
-	list_t *new_node_ptr = malloc(sizeof(list_t));
+	int len = 0;
 
-	if (!new_node_ptr)
-		return (NULL);
-
-	new_node_ptr->str = strdup(str);
-
-	if (!(new_node_ptr->str))
-	{
-		free(new_node_ptr);
-		return (NULL);
-	}
-
-	new_node_ptr->len = _strLen(new_node_ptr->str);
-	new_node_ptr->next = NULL;
-
-	return (new_node_ptr);
+	while (s[len])
+		len++;
+	return (len);
 }
